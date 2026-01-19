@@ -84,14 +84,6 @@ tab1, tab2, tab3 = st.tabs(["📊 Dataset Description", "📈 Training Analysis"
 with tab1:
     try:
         df = load_data()
-        # Calculate the number of rows for 30%
-        # The int() function truncates the decimal part, adjust if needed
-        rows_to_select = int(len(df) * 0.3) 
-
-        # Use the .tail() method to get the last 'rows_to_select' rows
-        last_30_percent = df.tail(rows_to_select)
-        last_30_percent.to_csv("data/test.csv")
-
 
         st.header("📋 Overview")
 
