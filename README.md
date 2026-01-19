@@ -122,30 +122,6 @@ Six classification models were implemented and evaluated on the Telco Customer C
 
 ---
 
-## Repository Structure
-
-```
-ML-Assignment2/
-├── data/
-│   └── dataset.csv                        # Dataset File
-├── model/
-│   ├── logistic_regression.pkl            # Trained models (6 total)
-│   ├── decision_tree.pkl
-│   ├── knn.pkl
-│   ├── naive_bayes.pkl
-│   ├── random_forest.pkl
-│   ├── xgboost.pkl
-│   ├── scaler.pkl                         # Feature scaler
-│   ├── feature_names.pkl                  # Feature names
-│   └── model_comparison_results.csv       # Results table
-├── app.py                                 # Streamlit web application
-├── requirements.txt                       # Python dependencies
-├── README.md                              # This file
-├── train.py                               # Main training script
-```
-
----
-
 ## Installation and Usage
 
 ### Prerequisites
@@ -184,25 +160,44 @@ ML-Assignment2/
 
 ## Streamlit Application Features
 
-The interactive web application provides:
+The interactive web application is organized into **3 tabs** for comprehensive churn analysis:
 
-1. **Dataset Upload:** Upload CSV files with customer data for churn prediction
-2. **Model Selection:** Choose from 6 trained classification models
-3. **Evaluation Metrics:** View all 6 performance metrics (Accuracy, AUC, Precision, Recall, F1, MCC)
-4. **Confusion Matrix:** Visualize prediction performance with heatmap
-5. **Classification Report:** Detailed per-class performance statistics
-6. **Prediction Interface:** Get real-time churn predictions on new customer data
+### Tab 1: 📊 Dataset Description
+- **Overview Metrics:** Total customers, features count, churn rate, and data quality
+- **Problem Statement:** Business context and objectives
+- **Feature Categories:** Interactive exploration of demographics, account info, services, and target variable
+- **Visualizations:** Distribution charts for gender, senior citizens, tenure, contract types, internet services, and churn
+- **Data Sample:** Preview of first 10 customer records
+- **Statistical Summary:** Numerical and categorical feature statistics
+- **Download Options:**
+  - Export full dataset as CSV
+  - Download test dataset (data/test.csv) - *can be uploaded in Tab 3 for testing*
 
----
+### Tab 2: 📈 Training Analysis
+- **Performance Overview:** Best model identification and accuracy metrics
+- **Results Table:** Complete comparison of all 6 models across 6 metrics (Accuracy, AUC, Precision, Recall, F1, MCC)
+- **Visual Comparison:**
+  - **Bar Charts:** Individual metric performance for each model
+  - **Heatmap:** Model vs metric performance matrix
+- **Model Rankings:** Sort models by any metric
+- **Training Configuration:** Dataset split details and preprocessing steps
 
-## Tech Stack
-
-- **Python 3.11**
-- **Machine Learning:** scikit-learn, XGBoost
-- **Data Processing:** pandas, numpy
-- **Visualization:** matplotlib, seaborn
-- **Web Framework:** Streamlit
-- **Model Persistence:** pickle
+### Tab 3: 🎯 Try It Out
+- **Model Selection:** Choose from 6 trained models (sidebar)
+- **Two Input Methods:**
+  - **📁 Upload CSV File:**
+    - Upload test dataset (data/test.csv) or training dataset downloaded from Tab 1
+    - Batch predictions on multiple customers
+    - Automatic preprocessing and feature alignment
+    - Downloadable prediction results
+    - Performance evaluation (if labels provided)
+    - Confusion matrix and classification report
+  - **✏️ Manual Input:**
+    - Interactive form with 19 customer attributes
+    - Sliders for numerical values (tenure, charges)
+    - Dropdowns for categorical values (contract, services)
+    - Real-time single customer prediction
+    - Probability distribution visualization
 
 ---
 
@@ -218,3 +213,5 @@ The interactive web application provides:
 
 ## View Live App
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://churn-predict-customer.streamlit.app)
+
+## Evaluation Instructions
