@@ -84,6 +84,14 @@ tab1, tab2, tab3 = st.tabs(["📊 Dataset Description", "📈 Training Analysis"
 with tab1:
     try:
         df = load_data()
+        # Calculate the number of rows for 30%
+        # The int() function truncates the decimal part, adjust if needed
+        rows_to_select = int(len(df) * 0.3) 
+
+        # Use the .tail() method to get the last 'rows_to_select' rows
+        last_30_percent = df.tail(rows_to_select)
+        last_30_percent.to_csv("data/test.csv")
+
 
         st.header("📋 Overview")
 
@@ -255,11 +263,20 @@ with tab1:
 
         st.header("📥 Download Dataset")
 
+    
         csv = df.to_csv(index=False)
         st.download_button(
             label="Download Full Dataset as CSV",
             data=csv,
             file_name="telco_customer_churn.csv",
+            mime="text/csv"
+        )
+
+        test_df = pd.read_csv('data/test.csv')
+        st.download_button(
+            label="Download Test Dataset as CSV",
+            data=test_df.to_csv(index=False),
+            file_name="test.csv",
             mime="text/csv"
         )
 
@@ -307,7 +324,7 @@ with tab2:
 
         st.header("📊 Visual Comparison")
 
-        subtab1, subtab2, subtab3 = st.tabs(["Bar Charts", "Radar Chart", "Heatmap"])
+        subtab1, subtab2 = st.tabs(["Bar Charts", "Heatmap"])
 
         with subtab1:
             st.subheader("Metric Comparison - Bar Charts")
@@ -365,46 +382,6 @@ with tab2:
                         st.pyplot(fig)
 
         with subtab2:
-            st.subheader("Radar Chart - Overall Performance")
-
-            categories = ['Accuracy', 'AUC', 'Precision', 'Recall', 'F1', 'MCC']
-            N = len(categories)
-
-            models_to_compare = st.multiselect(
-                "Select models to compare (max 4):",
-                results_df['Model'].tolist(),
-                default=results_df['Model'].tolist()[:3]
-            )
-
-            if models_to_compare:
-                fig, ax = plt.subplots(figsize=(10, 8), subplot_kw=dict(projection='polar'))
-
-                angles = [n / float(N) * 2 * np.pi for n in range(N)]
-                angles += angles[:1]
-
-                ax.set_theta_offset(np.pi / 2)
-                ax.set_theta_direction(-1)
-                ax.set_xticks(angles[:-1])
-                ax.set_xticklabels(categories)
-
-                colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
-
-                for idx, model in enumerate(models_to_compare[:4]):
-                    values = results_df[results_df['Model'] == model][categories].values.flatten().tolist()
-                    values += values[:1]
-
-                    ax.plot(angles, values, 'o-', linewidth=2, label=model, color=colors[idx])
-                    ax.fill(angles, values, alpha=0.15, color=colors[idx])
-
-                ax.set_ylim(0, 1)
-                ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1))
-                ax.grid(True)
-
-                st.pyplot(fig)
-            else:
-                st.info("Please select at least one model to display the radar chart.")
-
-        with subtab3:
             st.subheader("Heatmap - Model vs Metric Performance")
 
             fig, ax = plt.subplots(figsize=(10, 6))
