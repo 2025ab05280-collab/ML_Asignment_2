@@ -213,5 +213,3 @@ The interactive web application is organized into **3 tabs** for comprehensive c
 
 ## View Live App
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://churn-predict-customer.streamlit.app)
-
-## Evaluation Instructions
