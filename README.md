@@ -18,14 +18,14 @@ By accurately predicting customer churn, businesses can proactively implement re
 
 ### Dataset: Telco Customer Churn
 
-**Source:** Kaggle - Telco Customer Churn Dataset
-**Total Instances:** 7,043 customer records
-**Total Features:** 20 (after removing customerID)
-**Features after Preprocessing:** 30 (after one-hot encoding categorical variables)
-**Target Variable:** Churn (Binary: Yes/No)
-**Class Distribution:**
-- No Churn: 5,174 customers (73.5%)
-- Churn: 1,869 customers (26.5%)
+- **Source:** Kaggle - Telco Customer Churn Dataset
+- **Total Instances:** 7,043 customer records
+- **Total Features:** 20 (after removing customerID)
+- **Features after Preprocessing:** 30 (after one-hot encoding categorical variables)
+-  **Target Variable:** Churn (Binary: Yes/No)
+- **Class Distribution:**
+    - No Churn: 5,174 customers (73.5%)
+    - Churn: 1,869 customers (26.5%)
 
 ### Feature Categories
 
@@ -64,13 +64,6 @@ The following preprocessing steps were applied:
 4. **One-hot encoded** multi-category variables (MultipleLines, InternetService, OnlineSecurity, OnlineBackup, DeviceProtection, TechSupport, StreamingTV, StreamingMovies, Contract, PaymentMethod)
 5. **Converted** target variable `Churn` to binary (0: No, 1: Yes)
 6. **Applied** Standard Scaling to features for models requiring normalized data (Logistic Regression, kNN)
-
-### Dataset Characteristics
-
-- **Class Imbalance:** The dataset exhibits class imbalance with approximately 3:1 ratio of non-churners to churners
-- **Mixed Data Types:** Contains both numerical (tenure, charges) and categorical features
-- **No Missing Values:** After preprocessing, the dataset has no missing values
-- **Feature Correlations:** Monthly charges and total charges show high correlation; service features are correlated with internet service type
 
 ---
 
@@ -127,16 +120,6 @@ Six classification models were implemented and evaluated on the Telco Customer C
 
 4. **Feature Engineering Matters:** One-hot encoding created 30 features, which benefited linear models but challenged distance-based models like kNN.
 
-### Business Recommendations
-
-- **Primary Model:** Deploy **Logistic Regression** for its superior overall performance (80.93% accuracy) and interpretability
-- **Supplementary Screening:** Use **Naive Bayes** as an initial filter to identify high-risk customers for further analysis
-- **Future Improvements:**
-  - Apply SMOTE or class weighting to address imbalance
-  - Perform hyperparameter tuning for ensemble methods
-  - Implement cost-sensitive learning based on business costs of false positives vs false negatives
-  - Feature selection to reduce dimensionality and improve kNN performance
-
 ---
 
 ## Repository Structure
@@ -144,9 +127,8 @@ Six classification models were implemented and evaluated on the Telco Customer C
 ```
 ML-Assignment2/
 ├── data/
-│   └── telco_customer_churn.csv          # Dataset file
+│   └── dataset.csv                        # Dataset File
 ├── model/
-│   ├── train_telco_models.py             # Main training script
 │   ├── logistic_regression.pkl            # Trained models (6 total)
 │   ├── decision_tree.pkl
 │   ├── knn.pkl
@@ -159,8 +141,7 @@ ML-Assignment2/
 ├── app.py                                 # Streamlit web application
 ├── requirements.txt                       # Python dependencies
 ├── README.md                              # This file
-├── model_observations.md                  # Detailed model analysis
-└── Instructions.md                        # Assignment instructions
+├── train.py                               # Main training script
 ```
 
 ---
@@ -176,7 +157,7 @@ ML-Assignment2/
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-repository-url>
+   git clone https://github.com/2025ab05280-collab/ML_Asignment_2.git
    cd ML-Assignment2
    ```
 
@@ -188,7 +169,7 @@ ML-Assignment2/
 3. **Train the models (optional, pre-trained models included):**
    ```bash
    cd model
-   python train_telco_models.py
+   python train.py
    ```
 
 4. **Run the Streamlit app locally:**
@@ -214,7 +195,7 @@ The interactive web application provides:
 
 ---
 
-## Technologies Used
+## Tech Stack
 
 - **Python 3.11**
 - **Machine Learning:** scikit-learn, XGBoost
@@ -225,54 +206,15 @@ The interactive web application provides:
 
 ---
 
-## Performance Summary
-
-All models were trained on 4,930 samples and tested on 2,113 samples.
-
-**Training Environment:**
-- Split Ratio: 70% train, 30% test
-- Stratification: Applied to maintain class distribution
-- Feature Scaling: StandardScaler for Logistic Regression and kNN
-- Random State: 42 (for reproducibility)
-
-**Computational Details:**
-- Training Time: < 2 minutes for all models combined
-- Model Sizes: 1KB - 16MB (Random Forest largest)
-- Inference Speed: < 100ms per prediction for all models
-
----
-
 ## Author
 
-**Name:** [Your Name]
-**Roll Number:** [Your Roll Number]
-**Program:** M.Tech (AIML/DSE)
-**Course:** Machine Learning
-**Assignment:** 2
+**Name:** Akshansh Kumar
+
+**Roll Number:** 2025ab05280
+
+**Program:** M.Tech (AI/ML)
 
 ---
 
-## License
-
-This project is submitted as part of academic coursework for BITS Pilani M.Tech program.
-
----
-
-## Acknowledgments
-
-- Dataset Source: Kaggle - Telco Customer Churn
-- BITS Pilani Work Integrated Learning Programmes Division
-- Course Instructor: Machine Learning Faculty
-
----
-
-## References
-
-1. IBM Watson Analytics - Telco Customer Churn Dataset
-2. Scikit-learn Documentation: https://scikit-learn.org/
-3. XGBoost Documentation: https://xgboost.readthedocs.io/
-4. Streamlit Documentation: https://docs.streamlit.io/
-
----
-
-**Note:** This README is part of the required submission and should be included in the final PDF along with GitHub and Streamlit app links.
+## View Live App
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://churn-predict-customer.streamlit.app)
